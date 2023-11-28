@@ -1,6 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 
 export default function MainPage() {
+  // State fo form functions
+  const [date, setDate] = useState(null);
+  const [sourceCurrency, setSourceCurrency] = useState("");
+  const [targetCurrency, setTargetCurrency] = useState("");
+  const [amountInSourceCurrency, setAmountInSourceCurrency] = useState(0);
+  const [amountInTargetCurrency, setAmountInTargetCurrency] = useState(0);
+
+  // form handle
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(
+      date,
+      setSourceCurrency,
+      targetCurrency,
+      amountInSourceCurrency
+    );
+  };
+
   return (
     <div>
       <h1 className="lg:mx-28 text-5xl font-bold text-green-500">
@@ -16,18 +34,20 @@ export default function MainPage() {
       {/* input feilds */}
       <div className="flex mt-5 flex-col items-center justify-center">
         <section className="w-full items-center justify-center lg:w-1/2">
-          <form>
+          <form onSubmit={handleSubmit}>
             {/* Date */}
             <div className="mb-4">
               <label
-                for="Date"
+                htmlFor={date}
                 className="block mb-2 px-1 text-md text-[20px] text-gray-900 dark:text-white"
               >
                 Date
               </label>
               <input
-                type="Date"
-                id="Date"
+                type="date"
+                id={date}
+                name={date}
+                onChange={(e) => setDate(e.target.value)}
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
                 required
               />
@@ -36,16 +56,18 @@ export default function MainPage() {
             {/*  Source currency*/}
             <div className="mb-4">
               <label
-                for="Source_Curency"
+                htmlFor={sourceCurrency}
                 className="block mb-2 px-1 text-md text-[20px] text-gray-900 dark:text-white"
               >
                 Source Currency
               </label>
               <select
+                name={sourceCurrency}
+                id={sourceCurrency}
+                value={sourceCurrency}
+                onChange={(e) => setSourceCurrency(e.target.value)}
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
                 required
-                name=""
-                id=""
               >
                 <option value="">Select source cureency</option>
               </select>
@@ -54,16 +76,18 @@ export default function MainPage() {
             {/* target currency */}
             <div className="mb-4">
               <label
-                for="Target_Curency"
+                htmlFor={targetCurrency}
                 className="block mb-2 px-1 text-md text-[20px] text-gray-900 dark:text-white"
               >
                 Target Currency
               </label>
               <select
+                name={targetCurrency}
+                id={targetCurrency}
+                value={targetCurrency}
+                onChange={(e) => setTargetCurrency(e.target.value)}
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
                 required
-                name=""
-                id=""
               >
                 <option value="">Select Target cureency</option>
               </select>
@@ -72,14 +96,17 @@ export default function MainPage() {
             {/* Amount in Source currency */}
             <div className="mb-4">
               <label
-                for="Date"
+                htmlFor={amountInSourceCurrency}
                 className="block mb-2 px-1 text-md text-[20px] text-gray-900 dark:text-white"
               >
                 Amount in source cureency
               </label>
               <input
-                type="text"
-                id=""
+                type="number"
+                name={amountInSourceCurrency}
+                id={amountInSourceCurrency}
+                value={amountInSourceCurrency}
+                onChange={(e) => setAmountInTargetCurrency(e.target.value)}
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
                 placeholder="Amount in source currency"
                 required
@@ -93,9 +120,11 @@ export default function MainPage() {
                   Get Valuve
                 </button>
               </div>
-              <button className="bg-green-400 items-center rounded-full hov justify-center w-36 h-9 hover:bg-green-600">
-                Reset
-              </button>
+              {/* <div>
+                <button className="bg-green-400 items-center rounded-full hov justify-center w-36 h-9 hover:bg-green-600">
+                  Reset
+                </button>
+              </div> */}
             </div>
           </form>
         </section>
