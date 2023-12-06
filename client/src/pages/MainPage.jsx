@@ -6,17 +6,22 @@ export default function MainPage() {
   const [sourceCurrency, setSourceCurrency] = useState("");
   const [targetCurrency, setTargetCurrency] = useState("");
   const [amountInSourceCurrency, setAmountInSourceCurrency] = useState(0);
-  const [amountInTargetCurrency, setAmountInTargetCurrency] = useState(0);
+  // const [amountInTargetCurrency, setAmountInTargetCurrency] = useState(0);
 
-  // form handle
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(
-      date,
-      setSourceCurrency,
-      targetCurrency,
-      amountInSourceCurrency
-    );
+  //input currency validation
+  const handleInpuChange = (e) => {
+    const inputValue = e.target.value;
+    //regular expression for the input currency validation
+    const currencyPattern = '/^\$?\d{1,3}(,\d{3})*(\.\d{2})?$/';
+
+    //check if the input currency is valid
+    if(currencyPattern.test(inputValue)) {
+      setAmountInSourceCurrency(inputValue);
+    }
+    else {
+      alert('Invalid curenncy input currency, Please try again within correct type');
+    }
+
   };
 
   return (
@@ -34,7 +39,7 @@ export default function MainPage() {
       {/* input feilds */}
       <div className="flex mt-5 flex-col items-center justify-center">
         <section className="w-full items-center justify-center lg:w-1/2">
-          <form onSubmit={handleSubmit}>
+          <form>
             {/* Date */}
             <div className="mb-4">
               <label
@@ -69,7 +74,9 @@ export default function MainPage() {
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
                 required
               >
-                <option value="">Select source cureency</option>
+                <option value="hasitha">Select source cureency</option>
+                <option value="manohara">Select source cureency</option>
+                <option value="bandara">Select source cureency</option>
               </select>
             </div>
 
@@ -89,7 +96,9 @@ export default function MainPage() {
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
                 required
               >
-                <option value="">Select Target cureency</option>
+                <option value="hasitha">Select Target currncy</option>
+                <option value="manohara">Select Target currncy</option>
+                <option value="bandara">Select Target currncy</option>
               </select>
             </div>
 
@@ -106,7 +115,7 @@ export default function MainPage() {
                 name={amountInSourceCurrency}
                 id={amountInSourceCurrency}
                 value={amountInSourceCurrency}
-                onChange={(e) => setAmountInTargetCurrency(e.target.value)}
+                onChange={(e)=>handleInpuChange(e.target.value)}
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
                 placeholder="Amount in source currency"
                 required
@@ -117,14 +126,9 @@ export default function MainPage() {
             <div className="flex flex-row justify-between">
               <div>
                 <button className="bg-green-400 items-center rounded-full hov justify-center w-36 h-9 hover:bg-green-600">
-                  Get Valuve
+                  Get value
                 </button>
               </div>
-              {/* <div>
-                <button className="bg-green-400 items-center rounded-full hov justify-center w-36 h-9 hover:bg-green-600">
-                  Reset
-                </button>
-              </div> */}
             </div>
           </form>
         </section>
